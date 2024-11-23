@@ -83,7 +83,7 @@ modules/
 
 You can run the project in two ways:
 
-### 1. Using Laravel's Built-In Server
+### 1. Using Laravel Built-In Server
 
 Run the following command to start the server:
 
@@ -100,17 +100,17 @@ This will start the application on `http://127.0.0.1:8000`.
 The file `examples-284-29-1-.csv` (which was associated with assessment) is included in the root of this project as part of the assessment.
 
 - **For Local Use:** The file is located in the root directory of the project. You can use it directly by specifying the relative path `examples-284-29-1-.csv` in your commands.
-- **For Docker Use:** Inside the Docker container, the file is located at the path `/var/www/html/examples-284-29-1-.csv`. You can use this path to reference the file when running commands inside the container.
 
 ---
 
 ## Structured Homeowner Data Parser Command
 
-This command processes the included CSV file located in the container at /var/www/html/examples-284-29-1-.csv and outputs the parsed names to the console.
+This command processes the included CSV file located in the project root, named **examples-284-29-1-.csv** and outputs the parsed names to the console.
 
 ```bash
 php artisan homeowners:process examples-284-29-1-.csv
 ```
+hint: You can put your own path instead of **examples-284-29-1-.csv** for this command.
 
 ---
 
@@ -127,7 +127,7 @@ The parser has been tested with the following scenarios:
 
 ### Running Tests
 
-To run tests locally without Docker:
+To run tests locally:
 
 ```bash
 php artisan test
