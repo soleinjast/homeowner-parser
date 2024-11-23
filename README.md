@@ -74,7 +74,7 @@ modules/
 │   ├── Exceptions/       # Custom exceptions
 │   ├── Providers/        # Service providers for the module
 │   ├── Services/         # Business logic for parsing and processing data
-│   ├── Tests/            # Unit & integration and E2E tests for the module
+│   ├── Tests/            # Unit, Integration and E2E tests for the module
 ```
 
 ---
