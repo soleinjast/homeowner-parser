@@ -8,34 +8,35 @@ RUN apt-get update && apt-get install -y \
     libjpeg-dev \
     zip \
     unzip \
-    && docker-php-ext-install zip pdo_mysql gd
+    && docker-php-ext-install zip pdo_mysql gd \
+    && a2enmod rewrite \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Enable Apache mod_rewrite
-RUN a2enmod rewrite
-
 # Set the working directory in the container
 WORKDIR /var/www/html
 
-# Copy the current directory contents into the container
+# Copy application files
 COPY . .
 
+# Copy example .env and rename to .env
 COPY .env.example .env
 
-# Run composer install to install Laravel dependencies
-RUN composer install --prefer-dist --no-scripts --no-autoloader
-
-# Generate Laravel's app key
-RUN php artisan key:generate
+# Install Laravel dependencies
+RUN composer install --optimize-autoloader --no-dev
 
 # Set proper permissions for Laravel
 RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 775 /var/www/html/storage \
     && chmod -R 775 /var/www/html/bootstrap/cache
 
+# Update Apache to use Laravel's public directory
 RUN sed -i 's|/var/www/html|/var/www/html/public|' /etc/apache2/sites-available/000-default.conf
+
+# Generate Laravel's application key
+RUN php artisan key:generate
 
 # Expose port 80 for the web server
 EXPOSE 80
