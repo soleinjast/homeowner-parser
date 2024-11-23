@@ -22,7 +22,7 @@ WORKDIR /var/www/html
 # Copy the current directory contents into the container
 COPY . .
 
-COPY .env .env
+COPY .env.example .env
 
 # Run composer install to install Laravel dependencies
 RUN composer install --prefer-dist --no-scripts --no-autoloader
