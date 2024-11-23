@@ -37,13 +37,17 @@ If you have Docker installed, you can run the project without manually setting u
    git clone https://github.com/soleinjast/homeowner-parser.git
    cd homeowner-parser
    ```
-
-2. Start the application using Docker Compose:
+2. Install dependencies:
    ```bash
-   docker-compose up
+   composer install
+   ```
+   
+3. Start the application using Docker Compose:
+   ```bash
+   docker compose up
    ```
 
-3. You can now run Artisan commands or process the CSV file inside the Docker container (details below).
+4. You can now run Artisan commands or process the CSV file inside the Docker container (details below).
 
 #### Option 2: Manual Laravel Setup
 
@@ -118,7 +122,7 @@ This will start the application on `http://127.0.0.1:8000`.
 If you have Docker installed, you can run the project with `docker-compose`:
 
 ```bash
-docker-compose up
+docker compose up
 ```
 
 This will spin up the required services:
@@ -149,7 +153,7 @@ docker exec -it laravel_app php artisan homeowners:process /var/www/html/example
 Or if you are not using docker:
 
 ```bash
-php artisan homeowners:process /var/www/html/examples-284-29-1-.csv
+php artisan homeowners:process examples-284-29-1-.csv
 ```
 
 ---

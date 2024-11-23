@@ -10,6 +10,9 @@ RUN apt-get update && apt-get install -y \
     unzip \
     && docker-php-ext-install zip pdo_mysql gd
 
+# Install Composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
 # Enable Apache mod_rewrite
 RUN a2enmod rewrite
 
@@ -18,9 +21,6 @@ WORKDIR /var/www/html
 
 # Copy the current directory contents into the container
 COPY . .
-
-# Install Composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Run composer install to install Laravel dependencies
 RUN composer install --prefer-dist --no-scripts --no-autoloader
