@@ -24,32 +24,8 @@ This project processes homeowner data from a CSV file, parsing names into struct
 - **PHP:** 8.2+
 - **Composer**
 - **Laravel Framework**
-- **Docker and Docker Compose** (optional, for running in containers)
 
 ### Installation Steps
-
-#### Option 1: Using Docker (Recommended)
-
-If you have Docker installed, you can run the project without manually setting up Laravel:
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/soleinjast/homeowner-parser.git
-   cd homeowner-parser
-   ```
-2. Install dependencies:
-   ```bash
-   composer install
-   ```
-   
-3. Start the application using Docker Compose:
-   ```bash
-   docker compose up
-   ```
-
-4. You can now run Artisan commands or process the CSV file inside the Docker container (details below).
-
-#### Option 2: Manual Laravel Setup
 
 1. Clone the repository:
    ```bash
@@ -117,17 +93,6 @@ php artisan serve
 
 This will start the application on `http://127.0.0.1:8000`.
 
-### 2. Using Docker
-
-If you have Docker installed, you can run the project with `docker-compose`:
-
-```bash
-docker compose up
-```
-
-This will spin up the required services:
-- **Laravel App Container (`laravel_app`)**: The main PHP application server.
-
 ---
 
 ## File Location
@@ -142,15 +107,6 @@ The file `examples-284-29-1-.csv` (which was associated with assessment) is incl
 ## Structured Homeowner Data Parser Command
 
 This command processes the included CSV file located in the container at /var/www/html/examples-284-29-1-.csv and outputs the parsed names to the console.
-
-### Running Artisan Commands
-Use the `docker exec` command to access the Laravel container (`laravel_app`) and execute Artisan commands:
-
-```bash
-docker exec -it laravel_app php artisan homeowners:process /var/www/html/examples-284-29-1-.csv
-```
-
-Or if you are not using docker:
 
 ```bash
 php artisan homeowners:process examples-284-29-1-.csv
@@ -176,13 +132,6 @@ To run tests locally without Docker:
 ```bash
 php artisan test
 ```
-
-Or within Docker:
-
-```bash
-docker exec -it laravel_app php artisan test
-```
-This will execute all 40 (unit, integration and E2E tests) provided tests in project.
 
 
 ---
@@ -218,12 +167,6 @@ For local use:
 
 ```bash
 php artisan homeowners:process examples-284-29-1-.csv
-```
-
-For Docker use:
-
-```bash
-docker exec -it laravel_app php artisan homeowners:process /var/www/html/examples-284-29-1-.csv
 ```
 
 ### Output

@@ -22,8 +22,7 @@ WORKDIR /var/www/html
 COPY . .
 
 # Ensure a valid .env file is created
-RUN if [ ! -f .env ]; then cp .env.example .env; fi
-
+RUN  .env.example .env
 # Install Laravel dependencies
 RUN composer install --optimize-autoloader --no-dev
 
