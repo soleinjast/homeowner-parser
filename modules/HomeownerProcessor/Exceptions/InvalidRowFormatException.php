@@ -1,0 +1,14 @@
+<?php
+
+namespace Modules\HomeownerProcessor\Exceptions;
+
+use Exception;
+use Modules\HomeownerProcessor\Enumerations\ExceptionMessage;
+
+class InvalidRowFormatException extends Exception
+{
+    public function __construct()
+    {
+        parent::__construct(ExceptionMessage::INVALID_ROW_FORMAT->value);
+    }
+}

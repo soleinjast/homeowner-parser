@@ -1,0 +1,52 @@
+services:
+    # Laravel App
+    app:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        container_name: laravel_app
+        ports:
+            - "8000:80"
+        volumes:
+            - .:/var/www/html
+        environment:
+            - APP_ENV=local
+            - APP_DEBUG=true
+            - APP_KEY=base64:mZqCugDDyFtfybtzf5xkYW/Znh1dgAU0JtxaApybRaI=
+            - DB_HOST=db
+            - DB_PORT=3306
+            - DB_DATABASE=laravel_db
+            - DB_USERNAME=laravel_user
+            - DB_PASSWORD=secret
+        depends_on:
+            - db
+
+    # MySQL 8 Database
+    db:
+        image: mysql:8.0
+        container_name: mysql8_db
+        environment:
+            MYSQL_ROOT_PASSWORD: rootpassword
+            MYSQL_DATABASE: laravel_db
+            MYSQL_USER: laravel_user
+            MYSQL_PASSWORD: secret
+        ports:
+            - "3306:3306"
+        volumes:
+            - mysql_data:/var/lib/mysql
+
+    # Optional PHPMyAdmin
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        container_name: phpmyadmin
+        environment:
+            PMA_HOST: db
+            MYSQL_ROOT_PASSWORD: rootpassword
+        ports:
+            - "8081:80"
+        depends_on:
+            - db
+
+volumes:
+    mysql_data:
+        driver: local
