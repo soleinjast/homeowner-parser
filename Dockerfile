@@ -21,8 +21,8 @@ WORKDIR /var/www/html
 # Copy application files
 COPY . .
 
-# Copy example .env and rename to .env
-COPY .env.example .env
+# Ensure a valid .env file is created
+RUN if [ ! -f .env ]; then cp .env.example .env; fi
 
 # Install Laravel dependencies
 RUN composer install --optimize-autoloader --no-dev
