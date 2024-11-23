@@ -29,7 +29,7 @@ This project processes homeowner data from a CSV file, parsing names into struct
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/homeowner-parser.git
+   git clone https://github.com/soleinjast/homeowner-parser.git
    cd homeowner-parser
    ```
 
